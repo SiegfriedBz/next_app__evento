@@ -2,26 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer base {
+  .h1 {
+    @apply text-3xl md:text-6xl tracking-tight;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  main {
+    @apply px-4 md:px-8;
+  }
+
+  header {
+    @apply flex h-16 items-center px-4 md:px-8 border-b border-white/10;
+  }
+
+  footer {
+    @apply mt-auto relative flex h-[4rem] items-center py-4 px-4 md:px-8 border-t border-white/10;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  .custom-container {
+    @apply min-h-screen container flex flex-col mx-auto bg-gray-900;
+  }
+
+  .custom-scale {
+    @apply hover:scale-105 active:scale-[1.025] transition duration-300 ease-in-out;
+  }
+}
+
+/* SCROLLBAR STYLING */
+/* Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f1015;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0f1015 rgba(255, 255, 255, 0.1);
 }
