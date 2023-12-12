@@ -22,21 +22,19 @@ export function generateMetadata({ params }: TProps): Metadata | undefined {
   }
 }
 
-const pageNumberSchema = z.coerce
-  .number()
-  .int()
-  .positive()
-  .optional()
-  .default(1)
+const searchParamsSchema = z.object({
+  page: z.coerce.number().int().positive().optional().default(1),
+})
 
 const CityEventsPage = ({ params, searchParams }: TProps) => {
   const { city } = params
-  const parsedPageNumber = pageNumberSchema.safeParse(searchParams?.page)
-  if (!parsedPageNumber.success) {
-    throw new Error("Invalid page number")
+
+  const parsedSearchParams = searchParamsSchema.safeParse(searchParams)
+  if (!parsedSearchParams.success) {
+    throw new Error("Please use a page number")
   }
 
-  const pageNumber = parsedPageNumber.data
+  const pageNumber = parsedSearchParams.data.page
 
   const isAllEventsPage = city === "all"
 
