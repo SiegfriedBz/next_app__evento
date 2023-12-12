@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useEffect } from "react"
 import { twMerge } from "tailwind-merge"
+import { toast } from "react-toastify"
 
 export default function Error({
   error,
@@ -14,6 +15,7 @@ export default function Error({
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error)
+    toast.info(error.message)
   }, [error])
 
   return (
