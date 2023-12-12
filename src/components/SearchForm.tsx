@@ -1,10 +1,21 @@
 "use client"
 
+import { CITIES } from "@/lib/constants"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { z } from "zod"
 
-const searchInputSchema = z.string().trim().min(5)
+const searchInputSchema = z
+  .string()
+  .trim()
+  .min(5)
+  .refine(
+    (val) =>
+      CITIES.map((city) => city.toLowerCase()).includes(val.toLowerCase()),
+    {
+      message: "Please enter a listed city",
+    }
+  )
 
 const SearchForm = () => {
   const [searchInput, setSearchInput] = useState("")
@@ -15,7 +26,10 @@ const SearchForm = () => {
 
     const parsedSearchInput = searchInputSchema.safeParse(searchInput)
     if (!parsedSearchInput.success) {
-      alert("Please enter a valid city")
+      alert(
+        parsedSearchInput?.error?.errors?.[0]?.message ||
+          "Please enter a valid city"
+      )
       setSearchInput("")
       return
     }
