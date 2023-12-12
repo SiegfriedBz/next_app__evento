@@ -1,6 +1,6 @@
 export const RESULTS_PER_PAGE = 4
 
-export const CITIES = ["Seattle", "Austin"]
+export const CITIES = ["all", "Seattle", "Austin"]
 
 export const HEADER_LINKS = [
   {
