@@ -4,6 +4,8 @@ import "./globals.css"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import CustomContainer from "@/components/CustomContainer"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,6 +28,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </CustomContainer>
+        <ToastContainer />
       </body>
     </html>
   )
