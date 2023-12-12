@@ -8,7 +8,7 @@ import { z } from "zod"
 const searchInputSchema = z
   .string()
   .trim()
-  .min(5)
+  .min(5, { message: "Please enter at least 5 characters" })
   .refine(
     (val) =>
       CITIES.map((city) => city.toLowerCase()).includes(val.toLowerCase()),
