@@ -29,7 +29,7 @@ export default async function OgImage({
   return new ImageResponse(
     (
       <section className='relative'>
-        {eventItem !== undefined && (
+        {eventItem != undefined && (
           <Image src={eventItem.imageUrl} {...size} alt={alt} />
         )}
         <div className='absolute bottom-2 right-2 z-50 text-white/90'>
