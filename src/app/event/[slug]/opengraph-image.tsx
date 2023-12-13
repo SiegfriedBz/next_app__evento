@@ -1,8 +1,8 @@
 import { ImageResponse } from "next/og"
-import { capitalize } from "../../../lib/utils"
-import { getEvent } from "@/lib/server-utils"
-import { EventoEvent } from "@prisma/client"
 import Image from "next/image"
+import { getEvent } from "@/lib/server-utils"
+import { capitalize } from "@/lib/utils"
+import type { EventoEvent } from "@prisma/client"
 
 // Image metadata
 export const alt = "Evento event"
@@ -13,11 +13,11 @@ export const size = {
 
 export const contentType = "image/png"
 
-export default async function OgImage({
-  params,
-}: {
+type TProps = {
   params: { slug: string }
-}) {
+}
+
+export default async function OgImage({ params }: TProps) {
   let eventItem: EventoEvent | undefined = undefined
 
   try {
@@ -28,12 +28,12 @@ export default async function OgImage({
 
   return new ImageResponse(
     (
-      <section className='relative'>
+      <section>
         {eventItem != undefined && (
           <Image src={eventItem.imageUrl} {...size} alt={alt} />
         )}
-        <div className='absolute bottom-2 right-2 z-50 text-white/90'>
-          <h1 className='h1'>{capitalize(params.slug)}</h1>
+        <div>
+          <h1>{capitalize(params.slug)}</h1>
           <p>Evento - Browse events around you</p>
         </div>
       </section>
